@@ -3,6 +3,7 @@ package entities;
 import entities.enums.WorkerLevel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Worker {
@@ -13,11 +14,12 @@ public class Worker {
     private Departament departament;
     private List<HourContract> contracts = new ArrayList<>();
 
-    public Worker(){
+    public Worker(String name, Double baseSalary, String depart){
     }
 
-    public Worker(String name, Double baseSalary, Departament departament) {
+    public Worker(String name, WorkerLevel level, Double baseSalary, Departament departament) {
         this.name = name;
+        this.level = level;
         this.baseSalary = baseSalary;
         this.departament = departament;
     }
@@ -67,12 +69,17 @@ public class Worker {
     }
 
     public double income(int year, int month){
-        for HourContract c: contracts) {
-
+        double sum = baseSalary;
+        Calendar cal = Calendar.getInstance();
+        for( HourContract c : contracts) {
+            cal.setTime(c.getDate());
+            int c_year = cal.get(Calendar.YEAR);
+            int c_month = 1 + cal.get(Calendar.MONTH);
+            if (year == c_year && month == c_month){
+                sum += c.totalValue();
+            }
         }
-
-
-
+        return sum;
     }
 
 

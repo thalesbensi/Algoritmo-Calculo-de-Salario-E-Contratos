@@ -4,7 +4,6 @@ public class Departament {
         private String name;
 
         public Departament(){
-
         }
 
         public Departament(String name) {
